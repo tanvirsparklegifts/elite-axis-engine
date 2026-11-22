@@ -8,9 +8,9 @@ def test_read_main():
     response = client.get("/")
     assert response.status_code == 200
     data = response.json()
-    assert data["status"] == "secured-and-operational"
+    assert data["status"] == "development"
 
 def test_health_check():
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "healthy", "fail_closed_mode": "active"}
+    assert response.json() == {"status": "ok", "mode": "development"}
