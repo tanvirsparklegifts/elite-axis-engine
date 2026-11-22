@@ -13,9 +13,9 @@ def root():
     return {
         "engine": settings.PROJECT_NAME,
         "version": settings.VERSION,
-        "status": "secured-and-operational"
+        "status": "development"
     }
 
 @app.get("/health")
 def health_check():
-    return {"status": "healthy", "fail_closed_mode": "active"}
+    return {"status": "ok", "mode": "development"}
