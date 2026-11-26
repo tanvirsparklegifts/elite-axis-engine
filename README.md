@@ -2,7 +2,7 @@
 
 **Python / FastAPI backend foundation for the EliteAxis digital product ecosystem**
 
-[![Python CI](https://github.com/tanvirsparklegifts/elite-axis-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/tanvirsparklegifts/elite-axis-engine/actions/workflows/ci.yml)
+[![Python CI](https://github.com/tanvirsparklegifts/elite-axis-engine/actions/workflows/python-ci.yml/badge.svg)](https://github.com/tanvirsparklegifts/elite-axis-engine/actions/workflows/ci.yml)
 
 An in-development backend baseline for exploring modular API design, configuration boundaries, and testable service foundations. This repository is a learning and portfolio project—not a production financial platform.
 
