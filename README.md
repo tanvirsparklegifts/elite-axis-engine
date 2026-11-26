@@ -45,7 +45,7 @@ Open `http://127.0.0.1:8000/docs` for the OpenAPI interface.
 Run tests:
 
 ```bash
-pytest -q
+PYTHONPATH=. python -m pytest -q
 ```
 
 Tests use test-only secrets injected by the fixture. Never reuse those values outside the test suite.
