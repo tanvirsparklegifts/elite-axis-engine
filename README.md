@@ -1,43 +1,68 @@
 # EliteAxis Global Engine
 
-**FastAPI foundation for the EliteAxis digital product ecosystem**
+**Python / FastAPI backend foundation for the EliteAxis digital product ecosystem**
 
-This repository contains an early backend foundation. The current code exposes a root endpoint and a health endpoint using settings from app/core/config.py. It is a development baseline, not a production financial platform.
+[![Python CI](https://github.com/tanvirsparklegifts/elite-axis-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/tanvirsparklegifts/elite-axis-engine/actions/workflows/ci.yml)
 
-## Current implementation
+An in-development backend baseline for exploring modular API design, configuration boundaries, and testable service foundations. This repository is a learning and portfolio project—not a production financial platform.
 
-- FastAPI application entry point in app/main.py.
-- Configuration module under app/core/config.py.
-- Basic root and health routes.
-- Initial API tests in tests/test_concurrency.py.
+## Implemented today
 
-## Requirements
+- FastAPI application entry point in `app/main.py`.
+- Environment-backed settings using Pydantic Settings.
+- Fail-closed startup validation for distinct signing and vault-encryption secrets.
+- Root metadata and application-level health endpoints.
+- API smoke tests for the root endpoint, health endpoint, and generated OpenAPI schema.
+
+## Technology
 
 - Python 3.11+
-- Dependencies listed in requirements.txt
+- FastAPI
+- Pydantic Settings
+- pytest and HTTPX for tests
+- GitHub Actions for continuous integration
 
 ## Run locally
 
-    python -m venv .venv
-    source .venv/bin/activate
-    pip install -r requirements.txt
-    pip install pytest httpx
-    uvicorn app.main:app --reload
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+pip install pytest httpx
+```
 
-In another terminal:
+Set two different secrets (each at least 32 characters) before starting the app:
 
-    pytest -q
+```bash
+export SECRET_KEY='replace-with-a-long-random-signing-secret'
+export VAULT_ENCRYPTION_KEY='replace-with-a-different-long-random-vault-secret'
+uvicorn app.main:app --reload
+```
 
-OpenAPI docs are available at /docs while the local server is running.
+Open `http://127.0.0.1:8000/docs` for the OpenAPI interface.
+
+Run tests:
+
+```bash
+pytest -q
+```
+
+Tests use test-only secrets injected by the fixture. Never reuse those values outside the test suite.
 
 ## Configuration and security
 
-Review app/core/config.py before deployment. Do not commit secrets, production credentials, signing keys, or real customer data. Configure environment-specific values through environment variables or a secrets manager. The current health response is a basic application-level check; it does not prove that external databases, queues, or payment services are healthy.
+- Do not commit secrets, production credentials, signing keys, or customer data.
+- Use a secrets manager or protected environment variables for deployments.
+- Keep `SECRET_KEY` and `VAULT_ENCRYPTION_KEY` distinct.
+- The current `/health` endpoint reports application process health only; it does not check databases, queues, payment providers, or other dependencies.
 
 ## Project status and roadmap
 
-This is an in-development modular FastAPI baseline. Before any production or financial use, the project needs verified authentication and authorization tests, dependency health checks, migrations, observability, rate limiting, threat modelling, and deployment review. No payment processing, custody, banking, or regulated financial capability is claimed by this repository.
+**Status: early development.** Before production use, this project needs authentication and authorization implementation with negative-path tests, database migrations, dependency health checks, observability, rate limiting, threat modelling, deployment hardening, and independent security review.
+
+No payment processing, custody, banking, or regulated financial capability is currently claimed.
 
 ## Engineering workflow
 
-GitHub Actions runs the test suite on pushes and pull requests. Contributions should include tests and concise documentation for behavior changes.
+GitHub Actions runs the test suite on pushes and pull requests. Changes should include focused tests and documentation describing observable behavior.
