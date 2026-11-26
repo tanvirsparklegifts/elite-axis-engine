@@ -50,6 +50,8 @@ pytest -q
 
 Tests use test-only secrets injected by the fixture. Never reuse those values outside the test suite.
 
+See [docs/architecture.md](docs/architecture.md) for the current component boundary, configuration flow, limitations, and engineering milestones.
+
 ## Configuration and security
 
 - Do not commit secrets, production credentials, signing keys, or customer data.
